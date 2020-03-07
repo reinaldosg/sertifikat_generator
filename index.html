@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas">
+
+    </canvas>
+    <label for="name">Nama</label>
+    <input type="text" id="name" onchange="change()">
+
+    
+    <script>
+        var font_size = "400px";
+        var width = 0;
+        var height = 0;
+
+        var xText = 1828;
+        var yText = 1116
+
+        var canvas = document.getElementById("canvas")
+        const context = canvas.getContext("2d");
+        function getCursorPosition(canvas, event) {
+            const rect = canvas.getBoundingClientRect()
+            const x = event.clientX - rect.left
+            const y = event.clientY - rect.top
+            console.log("x: " + x + " y: " + y)
+        }
+
+        canvas.addEventListener('mousedown', function(e) {
+            getCursorPosition(canvas, e)
+        })
+        
+        change()
+
+        function change(){
+            context.clearRect(0, 0, canvas.width, canvas.height);   
+            base_image = new Image();
+            base_image.src = 'img/base.jpg';
+            base_image.onload = function(){
+                var rWidth = this.width 
+                var rHeight = this.height
+                canvas.height = rHeight
+                canvas.width = rWidth
+                context.drawImage(base_image, 0, 0, rWidth, rHeight);
+                context.font = `400 `+ font_size +`"Product Sans"`;
+                context.textAlign = "center"
+                var text = document.getElementById("name").value
+                context.fillText(text,xText,yText);
+            }
+        }
+    </script>
+</body>
+</html>
