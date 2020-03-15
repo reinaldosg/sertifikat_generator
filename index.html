@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <canvas id="canvas">
@@ -10,17 +12,24 @@
     </canvas>
     <label for="name">Nama</label>
     <input type="text" id="name" onchange="change()">
+    <label for="Image:">Templete Gambar</label>
+    <input type="file" accept="image/*" id="img" onChange="changeImage(this)" >
 
-    
     <script>
-        var font_size = "400px";
-        var width = 0;
-        var height = 0;
+        // Set Font
+        var font_size = "5rem";
+        var font_family = "Great Vibes";
 
-        var xText = 1828;
-        var yText = 1116
+        // Set Image
+        var imgSrc = 'img/base.jpg';
+        var size = 0.25;
 
-        var canvas = document.getElementById("canvas")
+        // Posisi Teks
+        var xText = 443;
+        var yText = 308;
+
+        var downloadLink = document.getElementById("link");
+        var canvas = document.getElementById("canvas");
         const context = canvas.getContext("2d");
         function getCursorPosition(canvas, event) {
             const rect = canvas.getBoundingClientRect()
@@ -31,25 +40,47 @@
 
         canvas.addEventListener('mousedown', function(e) {
             getCursorPosition(canvas, e)
-        })
+        });
         
         change()
 
         function change(){
             context.clearRect(0, 0, canvas.width, canvas.height);   
             base_image = new Image();
-            base_image.src = 'img/base.jpg';
+            base_image.src = imgSrc;
             base_image.onload = function(){
-                var rWidth = this.width 
-                var rHeight = this.height
+                var rWidth = this.width * size
+                var rHeight = this.height * size
                 canvas.height = rHeight
                 canvas.width = rWidth
-                context.drawImage(base_image, 0, 0, rWidth, rHeight);
-                context.font = `400 `+ font_size +`"Product Sans"`;
+                context.drawImage(base_image, 0, 0, rWidth , rHeight );
+                context.font = `300 `+ font_size + " " + font_family;
                 context.textAlign = "center"
                 var text = document.getElementById("name").value
                 context.fillText(text,xText,yText);
             }
+        }
+
+        function changeImage(inputFile) {
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+               base_image = new Image();
+               base_image.src = reader.result;
+               imgSrc = reader.result;
+               base_image.onload = function() {
+                    var rWidth = this.width * size
+                    var rHeight = this.height * size
+                    canvas.height = rHeight
+                    canvas.width = rWidth
+                    context.drawImage(base_image, 0, 0, rWidth, rHeight);
+               }
+           }
+
+           if (file) {
+               reader.readAsDataURL(file);
+           } 
         }
     </script>
 </body>
