@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class EditPage {
+public class EditImageController {
 
     @RequestMapping("/edit-page")
     public String editPage() { return "Edit/EditImage"; }

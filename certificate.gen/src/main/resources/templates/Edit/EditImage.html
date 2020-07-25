@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/Main.Header.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
     <title>Document</title>
 
@@ -48,8 +49,8 @@
                 </ul>
             </div>
             <div class="col-md-4 text-right">
-                <button class="btn btn-success">Login</button>
-                <button class="btn btn-info">Register</button>
+                <button class="btn btn-success" onclick="javascript:MovePage(4)">Login</button>
+                <button class="btn btn-info" onclick="javascript:MovePage(5)">Register</button>
             </div>
         </nav>
     </header>
@@ -251,18 +252,6 @@
             a.href = dataURL;
             a.download = "EditedImg.png";
             a.click();
-        }
-
-        function MovePage(code) {
-            var url = "http://localhost:8080/welcome-page";
-            if (code == "1") { // Back to page
-                url = "http://localhost:8080/welcome-page";
-            } else if (code == "2") { // Edit Page
-                url = "http://localhost:8080/edit-page";
-            } else { // About Page
-                // TODO
-            }
-            window.location = url;
         }
 
     </script>
