@@ -6,3 +6,4 @@ service:
       - 5432:5432
     environtment:
       - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=certificatedb

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-    @RequestMapping("/welcome-page")
+    @RequestMapping(value = {"/welcome-page", "/"})
     public String execute() {
         return "Header/MainHeader";
     }
